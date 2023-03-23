@@ -1,0 +1,21 @@
+- hosts: localhost
+  tasks:
+    - name: "pull docker image"
+      docker_image:
+           name: skabhi003/centos-ssh
+           source: pull
+
+    - name: " launch docker container"
+      docker_container:
+           name: dockerOS
+           image: skabhi003/centos-ssh
+           state: started
+           recreate: true
+           command: "/sbin/init"
+           capabilities: "SYS_ADMIN"
+           volumes:
+             - "/sys/fs/cgroup/:/sys/fs/cgroup:ro"
+      register: x
+
+    - debug:
+        var: x.ansible_facts.docker_container.NetworkSettings.Networks.bridge.IPAddress
