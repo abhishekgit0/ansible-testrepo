@@ -18,4 +18,4 @@
       register: x
 
     - debug:
-        var: x.ansible_facts.docker_container.NetworkSettings.Networks.bridge.IPAddress
+        var: x.ansible_facts.docker_container.NetworkSettings.IPAddress
